@@ -47,6 +47,8 @@ const App = () => {
     return deals.find((deal) => deal.key === currentDealId);
   };
 
+  const dealsToDisplay = dealsFromSearch.length > 0 ? dealsFromSearch : deals;
+
   if (isLoading) {
     return (
       <View style={styles.container}>
@@ -67,7 +69,7 @@ const App = () => {
     <View style={styles.container}>
       <View>
         <SearchBar searchDeals={searchDeals} clearSearch={clearSearch} />
-        <DealList deals={deals} onItemPress={setCurrentId} />
+        <DealList deals={dealsToDisplay} onItemPress={setCurrentId} />
       </View>
     </View>
   );

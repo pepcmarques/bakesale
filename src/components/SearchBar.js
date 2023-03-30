@@ -10,30 +10,21 @@ function SearchBar(props) {
   const [deals, setDeals] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  debouncedSearchDeals = debounce(props.searchDeals, 3000);
+  debouncedSearchDeals = debounce(props.searchDeals, 300);
 
   // BEGIN: This is a pattern: Run use effect callback function after setState
   useEffect(() => {
     debouncedSearchDeals(searchTerm);
-    console.log(searchTerm);
   }, [searchTerm]);
 
-  handleChange = (inputedText) => {
-    setSearchTerm(inputedText);
+  handleChange = (searchText) => {
+    if (searchText) {
+      setSearchTerm(searchText);
+    } else {
+      props.clearSearch();
+    }
   };
   // END:
-
-  useEffect(() => {
-    // This is a pattern to not get the error:
-    // "useEffect must not return anything besides a function"
-    const loadData = async () => {
-      setLoading(true);
-      const result = await ajax.fetchDealsSearchResult(searchTerm);
-      setDeals(result);
-      setLoading(false);
-    };
-    loadData();
-  }, []);
 
   return (
     <TextInput
