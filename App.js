@@ -67,10 +67,8 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <SearchBar searchDeals={searchDeals} clearSearch={clearSearch} />
-        <DealList deals={dealsToDisplay} onItemPress={setCurrentId} />
-      </View>
+      <SearchBar searchDeals={searchDeals} clearSearch={clearSearch} />
+      <DealList deals={dealsToDisplay} onItemPress={setCurrentId} />
     </View>
   );
 };
@@ -81,8 +79,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    //alignItems: "center",
+    //justifyContent: "center",
   },
 
   header: {

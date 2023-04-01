@@ -6,7 +6,6 @@ import debounce from "lodash.debounce";
 import ajax from "../ajax";
 
 function SearchBar(props) {
-  const [isLoading, setLoading] = useState(true);
   const [deals, setDeals] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 

@@ -75,17 +75,19 @@ const styles = StyleSheet.create({
     width: "100%",
     borderColor: "#bbb",
     marginTop: 35,
-    padding: 5,
+    paddingTop: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
 
   backLink: {
     fontSize: 14,
     fontWeight: "bold",
-    marginBottom: 5,
+    marginBottom: 12,
     color: "#22f",
   },
 
-  detail: {},
+  detail: { },
 
   image: {
     width: "100%",

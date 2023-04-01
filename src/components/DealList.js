@@ -9,7 +9,9 @@ function DealList(props) {
       <FlatList
         data={props.deals}
         keyExtractor={({ key }) => key}
-        renderItem={({ item }) => <DealItem deal={item} onPress={props.onItemPress} />}
+        renderItem={({ item }) => (
+          <DealItem deal={item} onPress={props.onItemPress} />
+        )}
       />
     </View>
   );
