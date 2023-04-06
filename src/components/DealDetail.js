@@ -76,14 +76,13 @@ const styles = StyleSheet.create({
     borderColor: "#bbb",
     marginTop: 35,
     paddingTop: 5,
-    paddingLeft: 10,
-    paddingRight: 10,
   },
 
   backLink: {
     fontSize: 14,
     fontWeight: "bold",
     marginBottom: 12,
+    marginLeft: 12,
     color: "#22f",
   },
 
@@ -104,12 +103,10 @@ const styles = StyleSheet.create({
   info: {
     padding: 10,
     backgroundColor: "#fff",
-    borderWidth: 1,
-    borderTopWidth: 0,
   },
 
   description: {
-    marginTop: 15,
+    padding: 15,
   },
 
   title: {
@@ -127,7 +124,7 @@ const styles = StyleSheet.create({
   },
 
   cause: {
-    flex: 2,
+    flex: 1,
   },
 
   price: {
