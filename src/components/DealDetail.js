@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import {
   ActivityIndicator,
+  Animated,
   View,
   Text,
   Image,
   TouchableOpacity,
+  ScrollView,
   StyleSheet,
+  useWindowDimensions,
 } from "react-native";
 
 import { priceDisplay } from "../util";
@@ -16,6 +19,10 @@ import ajax from "../ajax";
 function DealDetail(props) {
   const [isLoading, setLoading] = useState(true);
   const [deal, setDeal] = useState(props.initialDealData);
+
+  const scrollX = new Animated.Value(0);
+
+  const { width: windowWidth } = useWindowDimensions();
 
   useEffect(() => {
     // This is a pattern to not get the error:
@@ -42,7 +49,38 @@ function DealDetail(props) {
       <TouchableOpacity onPress={props.onBack}>
         <Text style={styles.backLink}>Back</Text>
       </TouchableOpacity>
-      <Image style={styles.image} source={{ uri: deal.media[0] }} />
+      <View style={styles.scrollContainer}>
+        {/* useNativeDriver: true REQUIRES Animated.ScrollView */}
+        <Animated.ScrollView
+          horizontal={true}
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          onScroll={Animated.event(
+            [
+              {
+                nativeEvent: {
+                  contentOffset: {
+                    x: scrollX,
+                  },
+                },
+              },
+            ],
+            { useNativeDriver: true }
+          )}
+          scrollEventThrottle={1}
+        >
+          {deal.media.map((image, imageIndex) => {
+            return (
+              <View
+                style={{ width: windowWidth, height: 250 }}
+                key={imageIndex}
+              >
+                <Image source={{ uri: image }} style={styles.image} />
+              </View>
+            );
+          })}
+        </Animated.ScrollView>
+      </View>
       <View style={styles.detail}>
         <View>
           <Text style={styles.title}>{deal.title}</Text>
@@ -86,7 +124,13 @@ const styles = StyleSheet.create({
     color: "#22f",
   },
 
-  detail: { },
+  detail: {},
+
+  scrollContainer: {
+    height: 150,
+    alignItems: "center",
+    justifyContent: "center",
+  },
 
   image: {
     width: "100%",
