@@ -3,9 +3,11 @@ import React, { useRef, useState, useEffect } from "react";
 import {
   ActivityIndicator,
   Animated,
+  Button,
   View,
   Text,
   Image,
+  Linking,
   TouchableOpacity,
   ScrollView,
   StyleSheet,
@@ -35,6 +37,10 @@ function DealDetail(props) {
     };
     loadData();
   }, []);
+
+  const openDealURL = () => {
+    Linking.openURL(deal.url);
+  };
 
   if (isLoading) {
     return (
@@ -81,10 +87,10 @@ function DealDetail(props) {
           })}
         </Animated.ScrollView>
       </View>
-      <View style={styles.detail}>
-        <View>
-          <Text style={styles.title}>{deal.title}</Text>
-        </View>
+      <View>
+        <Text style={styles.title}>{deal.title}</Text>
+      </View>
+      <ScrollView style={styles.detail}>
         <View style={styles.footer}>
           <View style={styles.info}>
             <Text style={styles.price}>{priceDisplay(deal.price)}</Text>
@@ -100,7 +106,10 @@ function DealDetail(props) {
         <View style={styles.description}>
           <Text>{deal.description}</Text>
         </View>
-      </View>
+        <View style={styles.buydeal}>
+          <Button title="Buy this deal" onPress={openDealURL} />
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -175,5 +184,9 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: "center",
     fontWeight: "bold",
+  },
+
+  buydeal: {
+    marginBottom: 30,
   },
 });
